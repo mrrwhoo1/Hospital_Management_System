@@ -40,15 +40,7 @@ Frontend	CustomTkinter (Modernized Tkinter UI)
 Backend	MySQL (Relational Database)
 Security	Bcrypt (Hashing), Dotenv (Secrets Management)
 Packaging	PyInstaller (Standalone Linux Binary)
-**Project Structure**
-assignment_work/
-├── IT212_Assignment_by_121682.py  # Main Entry Point (Login & Navigation)
-├── AdminPanel.py                  # Admin Dashboard & User Management
-├── PatientsPage.py                # Patient Record UI & Table View
-├── db_connector.py                # MySQL Connection & Query Wrapper
-├── patient_script.py              # Automated Data Seeding Logic
-├── assets/                        # UI Images, Icons, and Custom Themes
-└── schema.sql                     # Full Database Structure Export
+
 
 **Installation & Setup (Ubuntu/Linux)**
 1. Clone the Repository
