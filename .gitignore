@@ -1,0 +1,17 @@
+# Security: Protect your database credentials
+.env
+
+# Python: Ignore temporary files and virtual environments
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Build: Ignore files created by PyInstaller
+dist/
+build/
+*.spec
+
+# Assets: If you don't want to share the raw name lists
+assignment_work/assets/patient_names_newlines.txt
+assignment_work/assets/employee_names.txt
