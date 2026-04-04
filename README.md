@@ -1,59 +1,96 @@
-**Hospital Management System (HMS)**
+**Hospital Management System (HMS) — Beta v0.1.0**
 
-A modern desktop application built with Python and CustomTkinter for managing hospital operations. This project features a secure login system, patient record management, and automated data seeding.
+A professional-grade, dark-themed desktop application built for streamlined healthcare administration. Developed as part of the IT212 Assignment, this system leverages Python 3.12, CustomTkinter, and MySQL to provide a robust CRUD interface for hospital operations.
 
-🚀 Features
-Role-Based Access: Secure authentication for Admins, Doctors, and staff using bcrypt.
+Note: This project is currently in Active Beta. It is functional but undergoing performance optimizations for large-scale data handling to prevent UI hanging.
 
-Patient Records: Full CRUD (Create, Read, Update, Delete) for patient information.
+**Image Previews;**
 
-Batch Import: Custom scripts to populate the database from .txt files (patient_names_newlines.txt).
+<img width="600" height="400" alt="Screenshot from 2026-04-04 16-17-12" src="https://github.com/user-attachments/assets/b7c40d33-c4ec-4ac4-a1c0-79d95212054b" />
+<img width="600" height="400" alt="Screenshot from 2026-04-04 16-17-21" src="https://github.com/user-attachments/assets/31917e7c-7dbd-43bd-96b4-563ac11d16bc" />
+<img width="600" height="400" alt="Screenshot from 2026-04-04 16-17-30" src="https://github.com/user-attachments/assets/f12e6e9b-e32d-4204-9de4-e15b8d9a9990" />
+<img width="600" height="400" alt="Screenshot from 2026-04-04 16-17-49" src="https://github.com/user-attachments/assets/a3bbfef2-abc7-4679-917b-86def108f5d0" />
+<img width="600" height="400" alt="Screenshot from 2026-04-04 16-17-59" src="https://github.com/user-attachments/assets/460ef488-6a8f-4be9-a3ad-5f2bea88f328" />
 
-Modern UI: Dark-themed interface designed for Ubuntu users.
+**Core Features**
 
-🛠️ Tech Stack
-Language: Python 3.12
+**Secure Authentication**
+Role-Based Access: STILL BEING IMPLEMENTED!
 
-GUI: CustomTkinter
+Security: Industry-standard password hashing using Bcrypt for user credentials.
 
-Database: MySQL (Relational)
+Environment Safety: Sensitive database credentials managed via .env files using python-dotenv to prevent hardcoding secrets.
 
-Security: Bcrypt & Python-Dotenv
+**Patient & Employee Management**
+Full CRUD: Create, Read, Update, and Delete records with real-time MySQL synchronization.
 
-📋 Prerequisites
-Ensure you have MySQL Server installed and a .env file in the root directory:
+Modern UI: Built with CustomTkinter for a native Ubuntu "Dark Mode" aesthetic on Lenovo ThinkPad hardware.
 
-Plaintext
+Automated Seeding: Custom Python scripts to batch-import patient and employee data from formatted .txt files—perfect for rapid testing and deployment.
+
+**Database Architecture**
+Relational Mapping: Clean SQL schema handling relationships between Patients, Appointments, and Staff.
+
+Modular Logic: Database operations are isolated in db_connector.py for easier debugging and maintenance.
+
+**Technical Stack**
+Component	Technology
+Language	Python 3.12 (Running on Ubuntu Linux)
+Frontend	CustomTkinter (Modernized Tkinter UI)
+Backend	MySQL (Relational Database)
+Security	Bcrypt (Hashing), Dotenv (Secrets Management)
+Packaging	PyInstaller (Standalone Linux Binary)
+**Project Structure**
+assignment_work/
+├── IT212_Assignment_by_121682.py  # Main Entry Point (Login & Navigation)
+├── AdminPanel.py                  # Admin Dashboard & User Management
+├── PatientsPage.py                # Patient Record UI & Table View
+├── db_connector.py                # MySQL Connection & Query Wrapper
+├── patient_script.py              # Automated Data Seeding Logic
+├── assets/                        # UI Images, Icons, and Custom Themes
+└── schema.sql                     # Full Database Structure Export
+
+**Installation & Setup (Ubuntu/Linux)**
+1. Clone the Repository
+Bash
+git clone https://github.com/mrrwhoo1/Hospital_Management_System.git
+cd Hospital_Management_System
+2. Configure the Environment
+Create a .env file in the root directory:
+
 DB_HOST=localhost
-DB_USER=your_user
+DB_USER=your_username
 DB_PASS=your_password
 DB_NAME=hp_management_sys
-⚙️ Installation
-Clone the Repo:
 
-Bash
-git clone https://github.com/mrrwhoo1/hospital_management_system.git
-Setup Database:
+3. Initialize the Database
 Import the schema into your MySQL instance:
 
 Bash
-mysql -u root -p < schema.sql
-Install Requirements:
+mysql -u your_username -p < schema.sql
+4. Install Dependencies
+Ensure you are in your virtual environment, then run:
 
 Bash
-pip install customtkinter mysql-connector-python bcrypt python-dotenv
-Run:
+pip install customtkinter mysql-connector-python bcrypt python-dotenv pillow
 
+5. Launch the Application
 Bash
 python IT212_Assignment_by_121682.py
-⚠️ Known Issues & Limitations
-Performance: As CustomTkinter runs on a single thread, loading large datasets (100+ records) may cause temporary UI "freezing" while the database query executes. Will work on making it faster on the next few updates.
+**Performance & Beta Limitations**
 
-In Progress: Some advanced reporting modules are currently under development.
+Single-Threaded UI: Currently, database queries run on the main thread. Loading 100+ records may cause a temporary UI hang (the "Loading Freeze").
 
-🗺️ Roadmap
-[ ] Implement Threading for database queries to keep the UI responsive.
+Linux Binary: The standalone .bin file in the releases requires a local .env and an active MySQL server to function.
 
-[ ] Add pagination for the patient list view.
+Module Completion: Payment and Invoicing logic is currently in the "UI Placeholder" stage and will be finalized in future updates.
 
-[ ] Complete the billing and invoicing module.
+**Development Roadmap**
+[ ] Explore ways to get rid of freezing when you first open it.
+
+[ ] Reporting: Add functionality to export patient lists to PDF or CSV formats.
+
+[ ] Cross-Platform Support: Test and compile a .exe version for Windows users. 
+
+**Academic Context**
+**Created by Maron H. Chilomo Computer Science Student @ Cavendish University, Zambia.**
