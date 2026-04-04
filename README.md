@@ -29,17 +29,19 @@ Modern UI: Built with CustomTkinter for a native Ubuntu "Dark Mode" aesthetic on
 Automated Seeding: Custom Python scripts to batch-import patient and employee data from formatted .txt files—perfect for rapid testing and deployment.
 
 **Database Architecture**
+
 Relational Mapping: Clean SQL schema handling relationships between Patients, Appointments, and Staff.
 
 Modular Logic: Database operations are isolated in db_connector.py for easier debugging and maintenance.
 
 **Technical Stack**
-Component	Technology
-Language	Python 3.12 (Running on Ubuntu Linux)
-Frontend	CustomTkinter (Modernized Tkinter UI)
-Backend	MySQL (Relational Database)
-Security	Bcrypt (Hashing), Dotenv (Secrets Management)
-Packaging	PyInstaller (Standalone Linux Binary)
+
+1. Component	Technology
+2. Language	Python 3.12 (Running on Ubuntu Linux)
+3.Frontend	CustomTkinter (Modernized Tkinter UI)
+4. Backend	MySQL (Relational Database)
+5. Security	Bcrypt (Hashing), Dotenv (Secrets Management)
+6. Packaging	PyInstaller (Standalone Linux Binary)
 
 
 **Installation & Setup (Ubuntu/Linux)**
