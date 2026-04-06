@@ -6,7 +6,7 @@ def add_patients_batch():
     areas = ["Avondale", "Chilenje", "Woodlands", "Madina", "Chelstone", "Kabwe Road", "Rhodes Park"]
     
     # Path to your uploaded txt file
-    file_path = "assignment_work/assets/patient_names_newlines.txt"
+    file_path = "assets/patient_names_newlines.txt"
 
     try:
         with open(file_path, "r") as patients_file:

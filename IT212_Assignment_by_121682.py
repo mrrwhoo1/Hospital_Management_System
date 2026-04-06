@@ -20,12 +20,12 @@ class HealthApp(ck.CTk):
         self.window_maximizer()
         self.resizable(False, False)
 
-        bg_path = os.path.join(PATH, "/home/mrr_whoo/Code/py_code/assignment_work/assets/background.png")
+        bg_path = os.path.join(PATH, "assets/background.png")
         bg_img = Image.open(bg_path)
         self.bg_image = ck.CTkImage(light_image=bg_img, dark_image=bg_img,
                                     size=(self.winfo_screenwidth(), self.winfo_screenheight()))
 
-        logo_path = os.path.join(PATH, "/home/mrr_whoo/Code/py_code/assignment_work/assets/hospital_logo.png")
+        logo_path = os.path.join(PATH, "assets/hospital_logo.png")
         logo_img = Image.open(logo_path)
         self.hp_logo = ck.CTkImage(light_image=logo_img, dark_image=logo_img, size=(200, 150))
 

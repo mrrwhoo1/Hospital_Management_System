@@ -4,17 +4,21 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
+print("DB_USER:", os.getenv("DB_USER"))
+print("DB_PASSWORD:", os.getenv("DB_PASSWORD"))
+
 
 def get_db_connection():
     try:
         db = mysql.connector.connect(
             host=os.getenv("DB_HOST"),
             user=os.getenv("DB_USER"),
-            password=os.getenv("DB_PASS"),
+            password=os.getenv("DB_PASSWORD"),
             database=os.getenv("DB_NAME")
         )
         if db.is_connected():
             return db
+        print("connected")
     except Exception as e:
         print(f'Database Connection Error: {e}')
         return None

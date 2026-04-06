@@ -5,7 +5,7 @@ def add_employees():
     roles = ['Admin','Physiotherapist','Pharmacist','Receptionist','Doctor','Janitor','Security','Nurse']
     weights = [1,10,10,20,30,30,30,40]
     
-    with open("assignment_work/assets/employee_names.txt", "r") as employees:
+    with open("assets/employee_names.txt", "r") as employees:
         lines = employees.readlines()
         for indexx, name in enumerate(lines, start = 1):
             username = name.strip().lower().replace(" ","_")

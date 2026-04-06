@@ -23,20 +23,20 @@ class AdminPanelFrame(ck.CTkFrame):
 #------------------------------Images---------------------------------------------------------------------------------------#
                
         all_img_paths = [
-        "/home/mrr_whoo/Code/py_code/assignment_work/assets/Dashboard.png",
-        "/home/mrr_whoo/Code/py_code/assignment_work/assets/patients.png",
-        "/home/mrr_whoo/Code/py_code/assignment_work/assets/appointment.png",
-        "/home/mrr_whoo/Code/py_code/assignment_work/assets/payment.png",
-        "/home/mrr_whoo/Code/py_code/assignment_work/assets/employee.png",
-        "/home/mrr_whoo/Code/py_code/assignment_work/assets/activity.png",
-        "/home/mrr_whoo/Code/py_code/assignment_work/assets/help.png",
-        "/home/mrr_whoo/Code/py_code/assignment_work/assets/settings.png",
-        "/home/mrr_whoo/Code/py_code/assignment_work/assets/flag.png",
-        "/home/mrr_whoo/Code/py_code/assignment_work/assets/logout.png",
-        "/home/mrr_whoo/Code/py_code/assignment_work/assets/search.png",
-        "/home/mrr_whoo/Code/py_code/assignment_work/assets/user.png",
-        "/home/mrr_whoo/Code/py_code/assignment_work/assets/doctor.png",
-        "/home/mrr_whoo/Code/py_code/assignment_work/assets/bed.png",
+        "assets/Dashboard.png",
+        "assets/patients.png",
+        "assets/appointment.png",
+        "assets/payment.png",
+        "assets/employee.png",
+        "assets/activity.png",
+        "assets/help.png",
+        "assets/settings.png",
+        "assets/flag.png",
+        "assets/logout.png",
+        "assets/search.png",
+        "assets/user.png",
+        "assets/doctor.png",
+        "assets/bed.png",
     ]
 
         # Open each file exactly once, store as CTkImage
