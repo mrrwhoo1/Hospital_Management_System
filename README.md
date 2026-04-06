@@ -65,8 +65,7 @@ mysql -u your_username -p < schema.sql
 4. Install Dependencies
 Ensure you are in your virtual environment, then run:
 
-Bash
-pip install customtkinter mysql-connector-python bcrypt python-dotenv pillow
+run pip install -r requirements.txt
 
 5. Launch the Application
 Bash
