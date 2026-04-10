@@ -3,7 +3,7 @@
 
 A professional-grade desktop application built for streamlined healthcare administration. Developed as part of the IT212 Assignment at Cavendish University, Zambia. This release is a significant architectural upgrade over v0.1 — the UI framework has been fully migrated from CustomTkinter to **Python Flet**, the entire codebase has been refactored into an **object-oriented class-based architecture**, and several new modules have been added.
 
-> **Note:** This project is in Active Beta. Core features are functional. Payment write operations and persistent chat remain UI placeholders scheduled for v0.3.
+> **Note:** This project is in Active Beta. Core features are functional. persistent chat remain UI placeholder scheduled for v0.3.
 
 ---
 
