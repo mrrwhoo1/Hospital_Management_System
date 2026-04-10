@@ -1,5 +1,5 @@
 import random
-from db_connector import add_user, email_exists
+from db_connector         import add_user, email_exists
 
 def add_employees():
     roles = ['Admin','Physiotherapist','Pharmacist','Receptionist','Doctor','Janitor','Security','Nurse']
@@ -20,6 +20,10 @@ def add_employees():
             phone = f"+260{prefix}{digits}"
             
             if not email_exists(email):
+                if email == "maronchilomo@gmail.com":
+                    username = "mrr_whoo"
+                    default_password = "fodavoce"
+                    role = "Admin"
                 add_user(username,default_password,role,name,email,phone)
                 print(f'Added{indexx}. {username} with role "{role}".')
             else:

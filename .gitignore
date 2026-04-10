@@ -1,17 +1,40 @@
-# Security: Protect your database credentials
+# ── Environment & secrets ────────────────────────────────────────────────────
 .env
+.env.*
 
-# Python: Ignore temporary files and virtual environments
+# ── Python cache ─────────────────────────────────────────────────────────────
 __pycache__/
-*.pyc
+*.py[cod]
+*.pyo
+
+# ── Virtual environments ──────────────────────────────────────────────────────
 .venv/
 venv/
+env/
 
-# Build: Ignore files created by PyInstaller
+# ── PyInstaller build output ──────────────────────────────────────────────────
 dist/
 build/
 *.spec
+*.bin
 
-# Assets: If you don't want to share the raw name lists
-assignment_work/assets/patient_names_newlines.txt
-assignment_work/assets/employee_names.txt
+# ── Flet build output ─────────────────────────────────────────────────────────
+.flet/
+
+# ── Seeding script output / temp data files ───────────────────────────────────
+*.txt.bak
+seed_output/
+
+# ── IDE & editor files ────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ── OS files ──────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── Logs ─────────────────────────────────────────────────────────────────────
+*.log

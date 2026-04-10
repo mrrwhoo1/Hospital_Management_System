@@ -6,7 +6,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-
 def get_db_connection():
     try:
         db = mysql.connector.connect(
@@ -17,7 +16,8 @@ def get_db_connection():
         )
         if db.is_connected():
             return db
-        print("connected")
+        print("Connected")
+        
     except Exception as e:
         print(f'Database Connection Error: {e}')
         return None
@@ -76,16 +76,37 @@ def add_user(n,p_h,r,f_n,e,p):
     return False
 
 
-#-------------APPOINTMENTS PY------------------------------------------------
 
-def save_appointment(patient, doctor, dept, time):
+
+def get_patients_lookup():
+    db = get_db_connection()
+    if db:
+        cursor = db.cursor()
+        cursor.execute("SELECT patient_id, full_name FROM patients")
+        res = cursor.fetchall()
+        db.close()
+        return res
+    return []
+
+def get_doctors_lookup():
+    db = get_db_connection()
+    if db:
+        cursor = db.cursor()
+        cursor.execute("SELECT user_id, full_name FROM employees WHERE role = 'Doctor'")
+        res = cursor.fetchall()
+        db.close()
+        return res
+    return []
+
+def save_appointment(patient_id, employee_id, dept, time):
     db = get_db_connection()
     if db:
         try:
             cursor = db.cursor()
-            query = """INSERT INTO appointments (patient_name, doctor_name, department, appt_time) 
+            # Use the actual column names from your schema: patient_id, employee_id
+            query = """INSERT INTO appointments (patient_id, employee_id, department, appt_time) 
                        VALUES (%s, %s, %s, %s)"""
-            cursor.execute(query, (patient, doctor, dept, time))
+            cursor.execute(query, (patient_id, employee_id, dept, time))
             db.commit()
             cursor.close()
             db.close()
@@ -93,22 +114,6 @@ def save_appointment(patient, doctor, dept, time):
         except Exception as e:
             print(f"Error saving appointment: {e}")
     return False
-
-def get_all_appointments():
-    db = get_db_connection()
-    if db:
-        try:
-            cursor = db.cursor()
-            # We fetch exactly what we need for the table columns
-            cursor.execute("SELECT appt_id, appt_time, patient_name, doctor_name, department, status FROM appointments ORDER BY created_at DESC")
-            result = cursor.fetchall()
-            cursor.close()
-            db.close()
-            return result
-        except Exception as e:
-            print(f"Error fetching appointments: {e}")
-    return []
-
 
 def delete_appointment(appt_id):
     db = get_db_connection()
@@ -123,6 +128,53 @@ def delete_appointment(appt_id):
             return True
         except Exception as e:
             print(f"Error deleting appointment: {e}")
+    return False
+
+def get_all_appointments():
+    db = get_db_connection()
+    if db:
+        try:
+            cursor = db.cursor()
+            query = """
+                SELECT 
+                    a.appt_id, 
+                    a.appt_time, 
+                    p.full_name, 
+                    e.full_name, 
+                    a.department, 
+                    a.status,
+                    a.patient_id,   
+                    a.employee_id   
+                FROM appointments a
+                JOIN patients p ON a.patient_id = p.patient_id
+                JOIN employees e ON a.employee_id = e.user_id
+                ORDER BY a.appt_time ASC
+            """
+            cursor.execute(query)
+            result = cursor.fetchall()
+            cursor.close()
+            db.close()
+            return result
+        except Exception as e:
+            print(f"Error fetching appointments: {e}")
+    return []
+
+def update_appointment(appt_id, patient_id, employee_id, dept, time, status):
+    db = get_db_connection()
+    if db:
+        try:
+            cursor = db.cursor()
+            query = """UPDATE appointments 
+                       SET patient_id = %s, employee_id = %s, department = %s, 
+                           appt_time = %s, status = %s 
+                       WHERE appt_id = %s"""
+            cursor.execute(query, (patient_id, employee_id, dept, time, status, appt_id))
+            db.commit()
+            cursor.close()
+            db.close()
+            return True
+        except Exception as e:
+            print(f"Error updating appointment: {e}")
     return False
 
 
@@ -169,7 +221,7 @@ def get_all_patients():
             cursor.execute("""
                 SELECT patient_id, full_name, age, contact, billing_type 
                 FROM patients 
-                ORDER BY created_at DESC 
+                ORDER BY patient_id
             """)
             result = cursor.fetchall()
             cursor.close()
@@ -191,6 +243,26 @@ def delete_patient(patient_id):
             return True
         except Exception as e:
             print(f"Error deleting patient: {e}")
+    return False
+
+def update_patient(patient_id, name, age, contact, email, address, symptoms, billing):
+    db = get_db_connection()
+    if db:
+        try:
+            cursor = db.cursor()
+            query = """
+                UPDATE patients 
+                SET full_name = %s, age = %s, contact = %s, 
+                    email = %s, address = %s, symptoms = %s, billing_type = %s 
+                WHERE patient_id = %s
+            """
+            cursor.execute(query, (name, age, contact, email, address, symptoms, billing, patient_id))
+            db.commit()
+            cursor.close()
+            db.close()
+            return True
+        except Exception as e:
+            print(f"Error updating patient: {e}")
     return False
 
 
@@ -467,3 +539,20 @@ def get_dashboard_stats():
         "total_doctors": 0, "paid_patients": 0,
         "free_patients": 0, "doctors_list": [],
     }
+
+
+#------------------------Change accent color--------------
+def update_user_accent(username, color_code):
+    db = get_db_connection()
+    if db:
+        try:
+            cursor = db.cursor()
+            query = "UPDATE employees SET accent_color = %s WHERE username = %s"
+            cursor.execute(query, (color_code, username))
+            db.commit()
+            cursor.close()
+            db.close()
+            return True
+        except Exception as e:
+            print(f"Error updating accent: {e}")
+    return False
