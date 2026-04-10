@@ -12,7 +12,7 @@ A professional-grade desktop application built for streamlined healthcare admini
 | Area | v0.1.0 | v0.2.0 |
 |---|---|---|
 | UI Framework | CustomTkinter (Tkinter-based) | **Python Flet** (Flutter-based) |
-| Code Architecture | Functional (plain functions) | **Object-Oriented (classes)** |
+| Code Architecture | **Object-Oriented (classes)** | **Object-Oriented (classes)** |
 | Navigation | Single-window views | **Sidebar shell with dynamic view switching** |
 | Patient Module | Basic CRUD | CRUD + live search + DB auto-ID |
 | New Modules | — | Appointments, Payments, Employee, Help, Settings, Bug Tracker |
@@ -24,11 +24,70 @@ A professional-grade desktop application built for streamlined healthcare admini
 
 ## Image Previews
 
-<img width="600" height="400" alt="Dashboard view" src="https://github.com/user-attachments/assets/b7c40d33-c4ec-4ac4-a1c0-79d95212054b" />
-<img width="600" height="400" alt="Patient registry" src="https://github.com/user-attachments/assets/31917e7c-7dbd-43bd-96b4-563ac11d16bc" />
-<img width="600" height="400" alt="Appointments timeline" src="https://github.com/user-attachments/assets/f12e6e9b-e32d-4204-9de4-e15b8d9a9990" />
-<img width="600" height="400" alt="Payments ledger" src="https://github.com/user-attachments/assets/a3bbfef2-abc7-4679-917b-86def108f5d0" />
-<img width="600" height="400" alt="Staff directory" src="https://github.com/user-attachments/assets/460ef488-6a8f-4be9-a3ad-5f2bea88f328" />
+Login Page Comparison
+
+<p align="center">
+<img src="https://github.com/user-attachments/assets/eb5b111f-a30d-44b4-aa13-94fdb2d5e092" width="400" alt="Former Login">
+<img src="https://github.com/user-attachments/assets/e12abb5b-9b9f-40f0-98d3-243515d2eed7" width="400" alt="Current Login">
+</p>
+
+Dashboard Comparison (Performance Boost)
+
+<p align="center">
+<img src="https://github.com/user-attachments/assets/943c0bda-d526-40d6-aeb1-080d21c8a633" width="400" alt="Former Dashboard">
+<img src="https://github.com/user-attachments/assets/9e440439-2ad6-422a-a67c-71bd169f2e2a" width="400" alt="Current Dashboard">
+</p>
+Note: The former version failed to render data after 2 minutes; the Flet version loads instantly.
+
+Patients Page
+
+<p align="center">
+<img src="https://github.com/user-attachments/assets/230b1f6c-8191-43bb-95aa-494aacdff4ac" width="400" alt="Former Patients">
+<img src="https://github.com/user-attachments/assets/e902904d-ac96-4075-b751-4a6658c1ee46" width="400" alt="Current Patients">
+</p>
+
+Appointments
+
+<p align="center">
+<img src="https://github.com/user-attachments/assets/d65ea39b-c2bf-45b6-8b09-91f40326362e" width="400" alt="Former Appointments">
+<img src="https://github.com/user-attachments/assets/d52bfb6e-a5d1-4c47-a0db-60e160f77567" width="400" alt="Current Appointments">
+</p>
+
+Payments & Financials
+
+<p align="center">
+<img src="https://github.com/user-attachments/assets/2dc24ee4-292a-45fc-bc04-5a5d4a7dd62d" width="400" alt="Former Payments">
+<img src="https://github.com/user-attachments/assets/38dbeda4-f1dc-4344-b2ea-c24fb13474fd" width="400" alt="Current Payments">
+</p>
+
+Staff / Employee Directory
+
+<p align="center">
+<img src="https://github.com/user-attachments/assets/8aa119c1-90da-49f2-b616-bb9255f3565d" width="400" alt="Former Employees">
+<img src="https://github.com/user-attachments/assets/db9beb5e-01e4-4cbe-ac6b-7d1b0b2eb18e" width="400" alt="Current Employees">
+</p>
+
+Help & Support Center
+
+<p align="center">
+<img src="https://github.com/user-attachments/assets/dfeb95da-6e7e-4ec7-bc99-d300a62bb1e0" width="400" alt="Former Help">
+<img src="https://github.com/user-attachments/assets/e451c09b-64ed-4201-9c0c-9acb4487183c" width="400" alt="Current Help">
+</p>
+
+Settings
+
+<p align="center">
+<img src="https://github.com/user-attachments/assets/52b722ec-9bea-4615-9b7d-ee32225be0f6" width="400" alt="Former Settings">
+<img src="https://github.com/user-attachments/assets/0d4435ce-a1aa-479b-be62-870075e9d55f" width="400" alt="Current Settings">
+</p>
+
+New Feature: Analytics & Reports
+
+<p align="center">
+<img src="https://github.com/user-attachments/assets/eafe0f44-0a16-4066-ab9f-f28ad94b6e03" width="820" alt="New Report Module">
+</p>
+
+
 
 ---
 
@@ -76,7 +135,7 @@ A professional-grade desktop application built for streamlined healthcare admini
 
 | Component | Technology |
 |---|---|
-| Language | Python 3.12 (Ubuntu Linux) |
+| Language | Python 3.12 (Fedora Linux) |
 | UI Framework | **Flet** (Flutter-based cross-platform desktop) |
 | Database | MySQL (Relational) |
 | DB Abstraction | `db_connector.py` (custom module) |
@@ -153,11 +212,10 @@ python src/main.py
 ## Known Limitations (Beta v0.2)
 
 - **Consultation chat is session-only.** Messages are not persisted to the database. Persistent multi-user messaging requires a backend broker and is scheduled for v0.3.
-- **Appointment and payment data is partially static.** The timeline and ledger display correctly but write operations (creating/updating appointments and payments) are not yet wired to the database.
-- **Staff registration modal is a placeholder.** The Add Staff button and form exist in the UI but do not write to the database yet.
 - **Role-based UI restrictions not yet enforced.** All authenticated users can access all modules regardless of role. Role is captured at login and threaded through all classes in preparation for v0.3 enforcement.
 - **Dark mode toggle is wired but inactive.** The Settings switch exists; theme switching will be implemented in v0.3.
 - **Linux only** for the standalone binary. The `.bin` release requires a local `.env` and an active MySQL server.
+- **Help page, setting and report** are just static as at now and offer no real value.
 
 ---
 
@@ -169,13 +227,16 @@ python src/main.py
 - [x] Fix lambda closure bug in patient delete
 - [x] Reduce UI freeze via Flet ListView (replaces blocking renders)
 - [ ] Enforce role-based access control at the UI level
-- [ ] Wire appointment and payment write operations to the database
-- [ ] Complete staff registration modal
+- [x] Wire appointment and payment write operations to the database
+- [x] Complete staff registration modal
 - [ ] Implement persistent doctor consultation chat
 - [ ] Activate dark mode theme switching
 - [ ] Export patient records to PDF or CSV
 - [ ] Cross-platform: compile and test a Windows `.exe` build
 - [ ] Migrate single-threaded DB queries to async/background threads to eliminate remaining UI freeze on large datasets
+- [ ] connect reports page to the database
+- [ ] implement profile picture handling
+- [ ] add real guids to the help & center page
 
 ---
 
