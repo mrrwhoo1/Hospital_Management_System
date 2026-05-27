@@ -14,6 +14,7 @@ class PatientUI:
             spacing=10,
             padding=20,
             auto_scroll=False,
+
         )
 
         self._build_form_fields()

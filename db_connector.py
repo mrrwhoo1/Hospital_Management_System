@@ -1,25 +1,40 @@
 import mysql.connector
 import bcrypt
 import os
-from dotenv import load_dotenv
 
-load_dotenv()
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    print("dotenv not available — skipping (Android build)")
 
 
 def get_db_connection():
+    if "ANDROID_ARGUMENT" in os.environ or "ANDROID_BOOTLOGO" in os.environ:
+        db_host = "192.168.1.178"
+        # Since .env isn't loaded on Android, we must provide these manually
+        db_user = "mrr_whoo"      # Change to your actual MySQL username
+        db_pass = "@Fodavoce1012"  # Change to your actual MySQL password
+        db_name = "hp_management_sys"         # Change to your actual database name
+    else:
+        db_host = os.getenv("DB_HOST", "localhost")
+        db_user = os.getenv("DB_USER")
+        db_pass = os.getenv("DB_PASSWORD")
+        db_name = os.getenv("DB_NAME")
+
     try:
         db = mysql.connector.connect(
-            host=os.getenv("DB_HOST"),
-            user=os.getenv("DB_USER"),
-            password=os.getenv("DB_PASSWORD"),
-            database=os.getenv("DB_NAME")
+            host=db_host,
+            user=db_user,
+            password=db_pass,
+            database=db_name,
+            # Adding a small timeout helps debugging
+            connect_timeout=5 
         )
         if db.is_connected():
             return db
-        print("Connected")
-        
     except Exception as e:
-        print(f'Database Connection Error: {e}')
+        print(f"Database connection error: {e}")
         return None
     
 def email_exists(email):
@@ -556,3 +571,90 @@ def update_user_accent(username, color_code):
         except Exception as e:
             print(f"Error updating accent: {e}")
     return False
+
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# ADD THIS BLOCK TO THE BOTTOM OF YOUR EXISTING db_connector.py
+# It fetches every field needed to populate a receipt PDF.
+# ══════════════════════════════════════════════════════════════════════════════
+
+def get_payment_full_details(payment_id: int) -> dict | None:
+    """
+    Returns a dict with all receipt-relevant columns, or None on failure.
+
+    Joins: payments → patients → appointments → employees (doctor)
+    The appointment join is a LEFT JOIN so it works even when there is no
+    matching appointment row for the patient.
+    """
+    db = get_db_connection()
+    if not db:
+        return None
+    try:
+        cursor = db.cursor()
+        cursor.execute("""
+            SELECT
+                pay.payment_id,
+                pay.amount,
+                pay.method,
+                pay.status,
+                pay.notes,
+                pay.created_at,
+
+                pt.full_name   AS patient_name,
+                pt.patient_id,
+                pt.age,
+                pt.contact,
+                pt.email,
+                pt.address,
+                pt.symptoms,
+
+                -- Most recent appointment for this patient (may be NULL)
+                e.full_name    AS doctor_name,
+                a.department
+
+            FROM payments pay
+            JOIN patients pt ON pay.patient_id = pt.patient_id
+
+            -- Get the most recent appointment for this patient
+            LEFT JOIN appointments a
+                ON a.patient_id = pt.patient_id
+                AND a.appt_id = (
+                    SELECT appt_id FROM appointments
+                    WHERE patient_id = pt.patient_id
+                    ORDER BY appt_time DESC
+                    LIMIT 1
+                )
+            LEFT JOIN employees e ON a.employee_id = e.user_id
+
+            WHERE pay.payment_id = %s
+        """, (payment_id,))
+
+        row = cursor.fetchone()
+        cursor.close()
+        db.close()
+
+        if not row:
+            return None
+
+        return {
+            "pay_id":       row[0],
+            "amount":       float(row[1]),
+            "method":       row[2],
+            "status":       row[3],
+            "notes":        row[4] or "",
+            "date":         row[5],             # datetime object
+            "patient_name": row[6],
+            "patient_id":   row[7],
+            "age":          row[8],
+            "contact":      row[9],
+            "email":        row[10],
+            "address":      row[11],
+            "symptoms":     row[12],
+            "doctor_name":  row[13] or "—",
+            "department":   row[14] or "—",
+        }
+
+    except Exception as e:
+        print(f"Error fetching payment details: {e}")
+        return None

@@ -14,7 +14,7 @@ class BugReportUI:
             border_radius=15,
             border=ft.border.all(1, "#E0E0E0"),
             content=ft.Column([
-                ft.Text("Submit New Ticket", size=18, weight="bold"),
+                ft.Text("Submit New Ticket", size=18, weight="bold", color="black"),
                 ft.TextField(label="Issue Title", hint_text="What's broken?", border_color="#1b6a60"),
                 ft.TextField(label="Details", multiline=True, min_lines=2, max_lines=4),
                 ft.ElevatedButton(
@@ -42,8 +42,8 @@ class BugReportUI:
                     bgcolor="white",
                     content=ft.ListTile(
                         leading=ft.Icon(ft.Icons.BUG_REPORT, color="red" if i % 2 == 0 else "orange"),
-                        title=ft.Text(f"TKT-00{i}: Network error in Ward {i}"),
-                        subtitle=ft.Text(f"Reported by: Staff_{i}"),
+                        title=ft.Text(f"TKT-00{i}: Network error in Ward {i}", color="black"),
+                        subtitle=ft.Text(f"Reported by: Staff_{i}", color="black"),
                         trailing=self._status_badge("Open" if i < 5 else "Resolved"),
                     ),
                 )
@@ -57,7 +57,7 @@ class BugReportUI:
                 ft.Text("System Bug Tracker", size=28, weight="bold", color="#2C3E50"),
                 bug_form,
                 ft.Divider(height=30, color="transparent"),
-                ft.Text("Ticket History", size=18, weight="bold"),
+                ft.Text("Ticket History", size=18, weight="bold", color="black"),
                 ft.Container(expand=True, content=ticket_list),
             ]),
         )

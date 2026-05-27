@@ -1,5 +1,12 @@
-flet
-mysql-connector-python
-bcrypt
-python-dotenv
- 
+flet==0.84.0
+mysql-connector-python==9.6.0
+certifi
+bcrypt 
+
+
+
+
+
+
+
+

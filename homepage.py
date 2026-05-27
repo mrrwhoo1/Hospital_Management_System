@@ -139,8 +139,8 @@ class HomeUI:
         )
 
         self.chat_container = ft.Container(
-            bgcolor="#585858",
-            opacity=0.8,
+            bgcolor="#238FAAB6",
+            # opacity=0.8,
             expand=2,
             border_radius=30,
             padding=20,
@@ -148,7 +148,7 @@ class HomeUI:
                 [
                     ft.Text("Doctor Consultation", size=20, color="white"),
                     ft.Container(
-                        bgcolor="#a5a5a5",
+                        # bgcolor="#6f6d6dff",
                         expand=True,
                         border_radius=15,
                         padding=15,
@@ -173,7 +173,7 @@ class HomeUI:
         if self.chat_input.value != "":
             self.chat_messages.controls.append(
                 ft.Text(
-                    f"You: {self.chat_input.value}", color="#10302c", weight="bold"
+                    f"You: {self.chat_input.value}", color="#000000", weight="bold"
                 )
             )
             self.chat_input.value = ""
@@ -248,7 +248,7 @@ class HomeUI:
                     hover_color="white25",
                     on_click=self._change_view,
                 ),
-                ft.Divider(thickness=1, color="#0a341f"),
+                ft.Divider(thickness=1, color="white10"),
                 ft.ListTile(
                     leading=ft.Icon(ft.Icons.PERSON_PIN, color="white"),
                     title=ft.Text("Patients", color="white"),
@@ -321,7 +321,7 @@ class HomeUI:
         return ft.Container(
             content=sidebar_column,
             width=250,
-            bgcolor="#0d221f",
+            bgcolor="#10302c",
             padding=0,
             opacity=0.8,
         )

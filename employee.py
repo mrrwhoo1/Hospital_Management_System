@@ -7,9 +7,9 @@ class EmployeeUI:
         self.name = name
         self.role = role
         self.employee_list = ft.ListView(expand=True, spacing=10, padding=20)
-        # Create the search field as a class variable to access its value later
+       
         self.search_field = ft.TextField(
-            hint_text="Search staff...", 
+            hint_text="Search staff...",color="black" ,
             width=250, 
             prefix_icon=ft.Icons.SEARCH,
             # Triggers search when 'Enter' is pressed
