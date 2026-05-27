@@ -2,6 +2,7 @@ flet==0.84.0
 mysql-connector-python==9.6.0
 certifi
 bcrypt 
+reportlab
 
 
 
