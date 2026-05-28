@@ -11,11 +11,11 @@ except ImportError:
 
 def get_db_connection():
     if "ANDROID_ARGUMENT" in os.environ or "ANDROID_BOOTLOGO" in os.environ:
-        db_host = "192.168.1.178"
+        db_host = "your ip"
         # Since .env isn't loaded on Android, we must provide these manually
-        db_user = "mrr_whoo"      # Change to your actual MySQL username
-        db_pass = "@Fodavoce1012"  # Change to your actual MySQL password
-        db_name = "hp_management_sys"         # Change to your actual database name
+        db_user = "sql username"      # Change to your actual MySQL username
+        db_pass = "password"  # Change to your actual MySQL password
+        db_name = "database name"         # Change to your actual database name
     else:
         db_host = os.getenv("DB_HOST", "localhost")
         db_user = os.getenv("DB_USER")
